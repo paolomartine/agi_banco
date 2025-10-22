@@ -1,0 +1,11 @@
+CREATE TABLE cuentas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    numero VARCHAR(10) NOT NULL,
+    nombre VARCHAR(50) NOT NULL,
+    saldo DECIMAL(15,2) NOT NULL
+);
+
+INSERT INTO cuentas (numero, nombre, saldo) VALUES
+('1000', 'Paolo', 111000.00),
+('2000', 'Eliana', 130000.00),
+('3000', 'David', 50000.00);
