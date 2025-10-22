@@ -16,7 +16,7 @@ if ($conn->connect_error) {
 }
 
 // Bienvenida
-$agi->exec("AGI", "googletts.agi,\"Bienvenido al sistema bancario\",es");
+$agi->exec("AGI", "googletts.agi,\"Bienvenido al sistema bancario virtual\",es");
 $agi->exec("Wait", "1");
 
 // Pedir número de cuenta
@@ -57,14 +57,14 @@ switch ($op) {
         break;
 
     case '2': // Consignación
-        $agi->exec("AGI", "googletts.agi,\"Ingrese el valor a consignar\",es");
+        $agi->exec("AGI", "googletts.agi,\"Ingrese el valor a consignar y precione numeral\",es");
         $valor = $agi->get_data('beep', 8000, 10)['result'];
         if (empty($valor) || !is_numeric($valor)) {
             $agi->exec("AGI", "googletts.agi,\"Valor no válido. Operación cancelada\",es");
             break;
         }
         // Confirmar
-        $agi->exec("AGI", "googletts.agi,\"Usted va a consignar $valor pesos. Para confirmar marque 1, para corregir marque 2\",es");
+        $agi->exec("AGI", "googletts.agi,\"Usted va a consignar $valor pesos. Para confirmar marque 1 para corregir marque 2\",es");
         $conf = $agi->get_data('beep', 8000, 1)['result'];
         if ($conf == '1') {
             $nuevo_saldo = $saldo + $valor;
@@ -77,7 +77,7 @@ switch ($op) {
         break;
 
     case '3': // Transferencia
-        $agi->exec("AGI", "googletts.agi,\"Ingrese el número de cuenta destino\",es");
+        $agi->exec("AGI", "googletts.agi,\"Ingrese el número de cuenta destino y precione numeral\",es");
         $destino = $agi->get_data('beep', 8000, 10)['result'];
         $agi->exec("AGI", "googletts.agi,\"Ingrese el valor a transferir\",es");
         $valor = $agi->get_data('beep', 8000, 10)['result'];
@@ -119,7 +119,7 @@ switch ($op) {
 }
 
 // Fin de llamada
-$agi->exec("AGI", "googletts.agi,\"Gracias por usar el sistema bancario. Hasta luego\",es");
+$agi->exec("AGI", "googletts.agi,\"Gracias por usar el sistema bancario virtual. Hasta pronto\",es");
 $agi->hangup();
 $conn->close();
 ?>
